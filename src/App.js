@@ -5,9 +5,9 @@ import Cita from './components/Cita'
 function App() {
 
   //citas en local storage
-  let citasIniciales = JSON.parse(localStorage.getItem('citas'))
-  if(!citasIniciales){
-    citasIniciales = []
+  let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+  if (!citasIniciales) {
+    citasIniciales = [];
   }
 
   //arreglo de citas
@@ -15,14 +15,16 @@ function App() {
 
 
   //use effect operaciones cuando state cambia
-  useEffect( () =>{
-    if(citasIniciales){
-      localStorage.getItem('citas', JSON.stringify(citas))
-    }else{
-      localStorage.setItem('citas', JSON.stringify([]))
+  useEffect(() => {
+    let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+
+    if (citasIniciales) {
+      localStorage.setItem('citas', JSON.stringify(citas))
+    } else {
+      localStorage.setItem('citas', JSON.stringify([]));
     }
-  },[citas])
-  
+  }, [citas])
+
 
   //function de las citas actuales y agrege las nuevas
   const crearCita = cita => {
@@ -42,31 +44,31 @@ function App() {
 
   //mensaje Condicional
   //console.log(citas.length);
-  const titulo = citas.length === 0 ? 'No hay citas':'Administa tus citas'
+  const titulo = citas.length === 0 ? 'No hay citas' : 'Administa tus citas'
 
   return (
     <Fragment>
       <h1>Administrador de paciente</h1>
       <div className="container">
-         <div className="row">
-            <div className="one-half column">
-              <Formulario 
-                crearCita={crearCita}
-              />
-            </div>
-            <div className="one-half column">
-              <h2>{titulo}</h2>
-              { citas.map( cita => ( 
-                
-                <Cita 
-                  key={cita.id}
-                  cita={cita}
-                  eliminarCita={eliminarCita}
-                />
-              ) ) }
-            </div>
+        <div className="row">
+          <div className="one-half column">
+            <Formulario
+              crearCita={crearCita}
+            />
+          </div>
+          <div className="one-half column">
+            <h2>{titulo}</h2>
+            {citas.map(cita => (
 
-         </div>
+              <Cita
+                key={cita.id}
+                cita={cita}
+                eliminarCita={eliminarCita}
+              />
+            ))}
+          </div>
+
+        </div>
 
       </div>
     </Fragment>
