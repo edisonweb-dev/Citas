@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Cita = ({cita,eliminarCita}) => {
   //console.log(cita);
   return ( 
-      <div className="cita" key={cita.id}>
+      <div className="cita mb-3" key={cita.id}>
         <p>Mascota <span>{cita.mascota}</span></p>
         <p>Dueño <span>{cita.propietario}</span></p>
         <p>Fecha <span>{cita.fecha}</span></p>
